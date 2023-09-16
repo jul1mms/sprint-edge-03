@@ -1,0 +1,42 @@
+#include <DHT.h> // library: DHT sensor library
+#include <ArduinoJson.h> // library: ArduinoJson
+
+#define DHTPIN 3 // porta conectada ao sensor DHT11
+#define DHTTYPE DHT11 // definindo qual DHT será usado (DHT11)
+
+DHT dht(DHTPIN, DHTTYPE);
+
+void setup() {
+  Serial.begin(9600);
+  dht.begin();
+}
+
+void loop() {
+  // leitura da temperatura e umidade
+  float temperature = dht.readTemperature();
+  float humidity = dht.readHumidity();
+
+  // valida os valores
+  if (isnan(temperature) || isnan(humidity)) {
+    Serial.println("Erro ao ler o sensor DHT!");
+    delay(2000);
+    return;
+  }
+
+  // cria um objeto json (para leitura no node)
+  DynamicJsonDocument jsonDoc(128); //tamanho do buffer json
+
+  // atribuí os valores temp e umidade ao json
+  jsonDoc["temperatura"] = temperature;
+  jsonDoc["umidade"] = humidity;
+
+  // passao objeto json para string
+  String jsonString;
+  serializeJson(jsonDoc, jsonString);
+
+  // exibe o json no serial
+  Serial.println(jsonString);
+
+  // intervalo
+  delay(2000);
+}
