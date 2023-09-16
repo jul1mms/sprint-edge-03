@@ -1,0 +1,146 @@
+[
+    {
+        "id": "392d52040f853655",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "043ffed5f2f0aded",
+        "type": "serial-port",
+        "serialport": "COM4",
+        "serialbaud": "9600",
+        "databits": "8",
+        "parity": "none",
+        "stopbits": "1",
+        "waitfor": "",
+        "dtr": "none",
+        "rts": "none",
+        "cts": "none",
+        "dsr": "none",
+        "newline": "\\n",
+        "bin": "false",
+        "out": "char",
+        "addchar": "",
+        "responsetimeout": "10000"
+    },
+    {
+        "id": "3c3ac7c0dc0fd1c1",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "mqtt.tago.io",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "07f9823207bb0ca8",
+        "type": "mqtt out",
+        "z": "392d52040f853655",
+        "name": "sprint-03",
+        "topic": "tago/data/post",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "3c3ac7c0dc0fd1c1",
+        "x": 660,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "bd543a72e8e3853d",
+        "type": "function",
+        "z": "392d52040f853655",
+        "name": "function 1",
+        "func": "//verifica se o payload é válido\ntry {\n    var payloadObj = JSON.parse(msg.payload);\n\n    //chama os valores obtidos pelo arduino e serial in\n    var temperature = payloadObj.temperatura;\n    var humidity = payloadObj.umidade;\n\n    //criando um objeto para ser usado pelo mqtt (tago)\n    var mqttMessage = {\n        topic: \"tago/data/post\",\n        payload: JSON.stringify({ temperatura: temperature, umidade: humidity })\n    };\n\n    //enviando para o mqtt (tago)\n    msg.payload = mqttMessage;\n    return msg;\n    //caso algum erro ocorra\n} catch (error) {\n    node.error(\"Erro ao analisar o JSON: \" + error.message);\n    return null; //descarta a mensagem se o json for inválido\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 220,
+        "wires": [
+            [
+                "6e243f6d79c2fbe8",
+                "07f9823207bb0ca8"
+            ]
+        ]
+    },
+    {
+        "id": "6e243f6d79c2fbe8",
+        "type": "debug",
+        "z": "392d52040f853655",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 660,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "6119019a5f5625cf",
+        "type": "serial in",
+        "z": "392d52040f853655",
+        "name": "",
+        "serial": "043ffed5f2f0aded",
+        "x": 190,
+        "y": 220,
+        "wires": [
+            [
+                "25fb2ea4c7fac332"
+            ]
+        ]
+    },
+    {
+        "id": "25fb2ea4c7fac332",
+        "type": "json",
+        "z": "392d52040f853655",
+        "name": "",
+        "property": "payload",
+        "action": "str",
+        "pretty": true,
+        "x": 330,
+        "y": 220,
+        "wires": [
+            [
+                "bd543a72e8e3853d"
+            ]
+        ]
+    }
+]
