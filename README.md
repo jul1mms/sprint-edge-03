@@ -13,22 +13,22 @@ A ECOBUILD é uma empresa dedicada não apenas a ampliar o mercado de construç�
 A arquitetura IoT proposta para o sistema de monitoramento de temperatura e umidade usando Arduino, sensor DHT11 e tecnologias IoT (Node-RED e Tago.io) para prédios verdes transformados pelo Ecobuild pode ser dividida em três componentes principais: IoT devices, back-end e front-end.  
   
 ### IoT Devices
-São os dispositivos físicos que coletam dados de temperatura e umidade.
-1.	**Arduino com Sensor DHT11:** O Arduino atuará como o controlador principal para coletar dados de temperatura e umidade usando o sensor DHT11. Certifique-se de que o Arduino esteja conectado a uma fonte de energia confiável.
-2.	**Módulo de Conectividade IoT:** Você precisará de um módulo de conectividade IoT, como o ESP8266 ou ESP32, para permitir que o Arduino envie dados para a nuvem. Conecte o módulo IoT à rede Wi-Fi.  
+Dispositivos físicos que coletam dados de temperatura e umidade.
+1.	**Arduino com Sensor DHT11:** O Arduino atuará como o controlador principal para coletar dados de temperatura e umidade usando o sensor DHT11. O Arduino deve ser conectado a uma fonte de energia confiável.
+2.	**Módulo de Conectividade IoT:** Será necessário um módulo de conectividade IoT para permitir que o Arduino envie dados para a nuvem. Conecte o módulo IoT à rede Wi-Fi.  
 
 ### Componente Back-End
 O back-end é responsável pelo processamento e armazenamento dos dados coletados pelos dispositivos IoT.
-1.	**Plataforma IoT (Tago.io):** Use o Tago.io como plataforma IoT para receber os dados do sensor e armazená-los em um banco de dados. Configure a integração com o Node-RED para receber dados do Arduino.  
-2.	**Node-RED:** Use o Node-RED como middleware para processar e analisar os dados recebidos do sensor. Configure fluxos de trabalho no Node-RED para analisar os valores de temperatura e umidade em relação aos limites especificados.  
-3.	**Banco de Dados:** Armazene os dados coletados em um banco de dados seguro e escalável. Você pode usar serviços de banco de dados, como MongoDB ou MySQL.  
-4.	**Lógica de Alerta:** Configure regras no Node-RED para detectar valores fora dos limites adequados e acionar alertas, como e-mails ou notificações push, quando isso ocorrer.  
+1.	**Plataforma IoT (Tago.io):** O Tago.io é usado como plataforma IoT para receber os dados do sensor e armazená-los em um banco de dados. Configure a integração com o Node-RED para receber dados do Arduino.  
+2.	**Node-RED:** O Node-RED é usado como middleware para processar e analisar os dados recebidos do sensor. Configure fluxos de trabalho no Node-RED para analisar os valores de temperatura e umidade em relação aos limites especificados.  
+3.	**Banco de Dados:** Armazena os dados coletados em um banco de dados seguro e escalável. Pode usar serviços de banco de dados, como MongoDB ou MySQL.  
+4.	**Lógica de Alerta:** Configurações e regras no Node-RED para detectar valores fora dos limites adequados e acionar alertas, como e-mails ou notificações push, quando isso ocorrer.  
 
 ### Componente Front-End
 O front-end permite que os usuários visualizem e gerenciem os dados coletados pelos dispositivos IoT.
-1.	**Interface Web:** Desenvolva uma interface web amigável acessível por meio do site ou aplicativo da Ecobuild. Esta interface deve permitir aos usuários ver os dados de temperatura e umidade em tempo real, bem como o histórico de dados.
-2.	**Regras de Visualização:** Implemente gráficos e tabelas que exibam os dados de temperatura e umidade de forma clara e compreensível. Use cores e alertas visuais para indicar quando os valores estão fora dos limites adequados.
-3.	**Alertas de Usuário:** Configure notificações e alertas visuais para os usuários quando os valores de temperatura e umidade estiverem fora dos limites, destacando a importância da ação imediata.  
+1.	**Interface Web:** Interface web amigável acessível por meio do site ou aplicativo da Ecobuild. Esta interface deve permitir aos usuários ver os dados de temperatura e umidade em tempo real, bem como o histórico de dados.
+2.	**Regras de Visualização:** Gráficos e tabelas que exibem os dados de temperatura e umidade de forma clara e compreensível através do uso cores e alertas visuais para indicar quando os valores estão fora dos limites adequados.
+3.	**Alertas de Usuário:** Notificações e alertas visuais para os usuários quando os valores de temperatura e umidade estiverem fora dos limites, destacando a importância da ação imediata.  
 
 ## Instruções de Uso
 •	Para os prédios que fecharem negócios através do site/app da Ecobuild, a empresa fornecerá os dispositivos Arduino e o sensor DHT11 pré-configurados.  
@@ -39,7 +39,7 @@ O front-end permite que os usuários visualizem e gerenciem os dados coletados p
 
 ## Requisitos e Dependências
 •	Arduino com Sensor DHT11 (fornecido pela Ecobuild).  
-•	Módulo de Conectividade IoT (ESP8266 ou ESP32).  
+•	Módulo de Conectividade IoT (como ESP8266 ou ESP32).  
 •	Plataforma IoT (Tago.io).  
 •	Node-RED para processamento de dados.  
 •	Servidor de Banco de Dados (MongoDB, MySQL, etc.).  
