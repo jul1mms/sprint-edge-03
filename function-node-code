@@ -1,0 +1,22 @@
+//verifica se o payload é válido
+try {
+    var payloadObj = JSON.parse(msg.payload);
+
+    //chama os valores obtidos pelo arduino e serial in
+    var temperature = payloadObj.temperatura;
+    var humidity = payloadObj.umidade;
+
+    //criando um objeto para ser usado pelo mqtt (tago)
+    var mqttMessage = {
+        topic: "tago/data/post",
+        payload: JSON.stringify({ temperatura: temperature, umidade: humidity })
+    };
+
+    //enviando para o mqtt (tago)
+    msg.payload = mqttMessage;
+    return msg;
+    //caso algum erro ocorra
+} catch (error) {
+    node.error("Erro ao analisar o JSON: " + error.message);
+    return null; //descarta a mensagem se o json for inválido
+}
